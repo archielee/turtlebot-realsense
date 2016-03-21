@@ -8,16 +8,16 @@ sudo apt-get upgrade
 sudo apt-get install libusb-1.0-0-dev
 sudo apt-get install libssl-dev
 
-if [[ ! -d /home/administrator/catkin_ws/src/librealsense ]];
+if [[ ! -d /home/$USER/catkin_ws/src/librealsense ]];
 then
-	mkdir /home/administrator/catkin_ws
-	mkdir /home/administrator/catkin_ws/src
-	cd /home/administrator/catkin_ws/src
+	mkdir /home/$USER/catkin_ws
+	mkdir /home/$USER/catkin_ws/src
+	cd /home/$USER/catkin_ws/src
 	catkin_init_workspace
 	git clone https://github.com/IntelRealSense/librealsense.git
 	cd librealsense
 else
-	cd /home/administrator/catkin_ws/src/librealsense
+	cd /home/$USER/catkin_ws/src/librealsense
 	git pull
 fi
 
@@ -30,16 +30,16 @@ sudo udevadm control --reload-rules && udevadm trigger
 
 make && sudo make install
 
-sudo cp -r /home/administrator/catkin_ws/src/librealsense/include/librealsense /usr/local/include
+sudo cp -r /home/$USER/catkin_ws/src/librealsense/include/librealsense /usr/local/include
 
-if [[ ! -d /home/administrator/catkin_ws/src/realsense ]];
+if [[ ! -d /home/$USER/catkin_ws/src/realsense ]];
 then
-	cd /home/administrator/catkin_ws/src
+	cd /home/$USER/catkin_ws/src
 	git clone https://github.com/intel-ros/realsense.git
 else
-	cd /home/administrator/catkin_ws/src/realsense
+	cd /home/$USER/catkin_ws/src/realsense
 	git pull
 fi
 
-cd /home/administrator/catkin_ws
+cd /home/$USER/catkin_ws
 catkin_make
