@@ -30,6 +30,8 @@ fi
 sudo cp config/99-realsense-libusb.rules /etc/udev/rules.d/
 sudo udevadm control --reload-rules && udevadm trigger
 
+cd /home/$USER/catkin_ws/src/librealsense
+
 make && sudo make install
 
 sudo cp -r /home/$USER/catkin_ws/src/librealsense/include/librealsense /usr/local/include
