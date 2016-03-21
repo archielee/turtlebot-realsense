@@ -1,8 +1,5 @@
 #!/bin/bash
 
-# Exit if any error occurs
-set -e
-
 sudo apt-get update
 sudo apt-get upgrade
 sudo apt-get install libusb-1.0-0-dev
