@@ -1,0 +1,33 @@
+#!/bin/bash
+
+# Part 2 of the installation, should be run after part 1 and restarting the computer
+
+if [[ -d /home/$USER/catkin_ws/src/librealsense ]]
+then
+	cd /home/$USER/catkin_ws/src/librealsense
+        ./scripts/patch-uvcvideo-4.4.sh v4.4-wily
+
+        sudo cp config/99-realsense-libusb.rules /etc/udev/rules.d/
+        sudo udevadm control --reload-rules && udevadm trigger
+
+        cd /home/$USER/catkin_ws/src/librealsense
+
+        make && sudo make install
+
+        sudo cp -r /home/$USER/catkin_ws/src/librealsense/include/librealsense /usr/local/include
+else
+	echo "Run part 1 first!"
+	exit 1
+fi
+
+
+if [[ ! -d /home/$USER/catkin_ws/src/realsense ]];
+then
+        cd /home/$USER/catkin_ws/src
+        git clone https://github.com/intel-ros/realsense.git
+fi
+
+cd /home/$USER/catkin_ws
+catkin_make
+
+echo "Installation is complete! Test your RealSense by running an example in librealsense/bin/"

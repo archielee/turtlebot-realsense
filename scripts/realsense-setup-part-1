@@ -1,0 +1,23 @@
+#!/bin/bash
+
+sudo apt-get update
+sudo apt-get upgrade
+sudo apt-get install libusb-1.0-0-dev
+sudo apt-get install libssl-dev
+
+if [[ ! -d /home/$USER/catkin_ws/src/librealsense ]];
+then
+	mkdir /home/$USER/catkin_ws
+	mkdir /home/$USER/catkin_ws/src
+	cd /home/$USER/catkin_ws/src
+	catkin_init_workspace
+	git clone https://github.com/IntelRealSense/librealsense.git
+	cd librealsense
+
+	./scripts/install_glfw3.sh
+	./scripts/install_dependencies-4.4.sh
+else
+	exit 1
+fi
+
+echo "Part 1 of RealSense installation is complete. Reboot and run part 2."
